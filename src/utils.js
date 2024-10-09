@@ -13,13 +13,13 @@ const getCompareData = (data1, data2) => {
     if (!_.has(data1, key) && _.has(data2, key)) {
       accum += `\n  + ${key}: ${data2[key]}`;
     }
-    if (_.has(data1, key) && _.has(data2, key)) {
-      if (data1[key] === data2[key]) {
-        accum += `\n    ${key}: ${data1[key]}`;
-      } else {
-        accum += `\n  - ${key}: ${data1[key]}`;
-        accum += `\n  + ${key}: ${data2[key]}`;
-      }
+    if (_.has(data1, key) && _.has(data2, key) && data1[key] === data2[key]) {
+      accum += `\n    ${key}: ${data1[key]}`;
+    }
+
+    if (_.has(data1, key) && _.has(data2, key) && data1[key] === !data2[key]) {
+      accum += `\n  - ${key}: ${data1[key]}`;
+      accum += `\n  + ${key}: ${data2[key]}`;
     }
 
     return accum;
